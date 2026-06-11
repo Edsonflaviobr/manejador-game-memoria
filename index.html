@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MANEJA DOR - Jogo da Memória BPS</title>
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div id="game-container">
+
+  <div id="intro">
+    <img src="img/manejador.jpg" id="logo">
+
+    <h1>Jogo da Memória BPS da Dor</h1>
+
+    <p class="intro-text">
+      Encontre as combinações entre os campos da abordagem ampliada e os fatores determinantes da dor em pacientes internados na UTI.
+      Você tem <strong>120 segundos</strong> para finalizar.
+    </p>
+
+    <input type="text" id="player-name" placeholder="Digite seu nome">
+
+    <button id="start-btn">INICIAR JOGO</button>
+  </div>
+
+  <div id="game-area">
+    <div id="top-panel">
+      <div class="panel-card">Jogador: <span id="player-display"></span></div>
+      <div class="panel-card">Tempo: <span id="timer">120</span>s</div>
+      <div class="panel-card">Pares encontrados: <span id="matches">0</span>/10</div>
+    </div>
+
+    <div id="memory-board"></div>
+
+    <div id="feedback">
+      Clique em uma carta de campo e em um fator correspondente.
+    </div>
+  </div>
+
+  <div id="final-screen">
+    <div id="final-emoji"></div>
+    <h1 id="final-title"></h1>
+    <p class="intro-text" id="final-message"></p>
+    <button id="restart-btn" onclick="location.reload()">JOGAR NOVAMENTE</button>
+  </div>
+
+</div>
+
+<audio id="sound-bg" loop>
+  <source src="audio/sunshine-rain.mp3" type="audio/mpeg">
+</audio>
+
+<script src="js/script.js"></script>
+</body>
+</html>
