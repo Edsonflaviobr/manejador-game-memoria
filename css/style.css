@@ -11,6 +11,7 @@ body{
   background:linear-gradient(135deg,#d9f3ff,#efe1ff);
   min-height:100vh;
   display:flex;
+  flex-direction:column;
   justify-content:center;
   align-items:center;
   padding:20px;
@@ -61,14 +62,16 @@ h1{
   font-size:1rem;
 }
 
-#start-btn, #restart-btn{
-  padding:14px 32px;
+#restart-btn,
+#start-btn,
+#start-intro-btn {
+  background: linear-gradient(135deg,#0d47a1,#1976d2);
   border:none;
-  border-radius:14px;
-  background:linear-gradient(to right,#7b1fa2,#00acc1);
+  padding:15px 35px;
+  border-radius:15px;
   color:white;
-  font-size:1rem;
-  font-weight:900;
+  font-size:1.1rem;
+  font-weight:bold;
   cursor:pointer;
   transition:0.3s;
 }
@@ -206,6 +209,17 @@ h1{
   z-index:10;
 }
 
+#credits {
+  width: 100%;
+  max-width: 900px;
+  margin-top: 20px;
+  padding: 10px 20px;
+  text-align: center;
+  font-size: 0.72rem;
+  color: #666;
+  line-height: 1.5;
+}
+
 @keyframes fall{
   to{ transform:translateY(110vh) rotate(720deg); }
 }
@@ -247,4 +261,26 @@ h1{
   h1{
     font-size:1.5rem;
   }
+}
+
+#video-screen {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+}
+
+#intro-video {
+  width: 90%;
+  max-width: 700px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+#video-screen .intro-text{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#player-name{
+  margin-bottom: 20px;
 }

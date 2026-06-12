@@ -1,53 +1,53 @@
 const pairs = [
   {
-    field:"biologico",
-    campo:"Campo biológico",
-    fator:"Dor por imobilidade prolongada"
+    field: "biologico",
+    campo: "Campo biológico",
+    fator: "Dor por imobilidade prolongada"
   },
   {
-    field:"biologico",
-    campo:"Campo biológico",
-    fator:"Procedimentos invasivos"
+    field: "biologico",
+    campo: "Campo biológico",
+    fator: "Procedimentos invasivos"
   },
   {
-    field:"biologico",
-    campo:"Campo biológico",
-    fator:"Tensão muscular e rigidez"
+    field: "biologico",
+    campo: "Campo biológico",
+    fator: "Tensão muscular e rigidez"
   },
   {
-    field:"emocional",
-    campo:"Campo emocional",
-    fator:"Medo da piora clínica"
+    field: "emocional",
+    campo: "Campo emocional",
+    fator: "Medo da piora clínica"
   },
   {
-    field:"emocional",
-    campo:"Campo emocional",
-    fator:"Ansiedade antes da mobilização"
+    field: "emocional",
+    campo: "Campo emocional",
+    fator: "Ansiedade antes da mobilização"
   },
   {
-    field:"emocional",
-    campo:"Campo emocional",
-    fator:"Insônia e hipervigilância"
+    field: "emocional",
+    campo: "Campo emocional",
+    fator: "Insônia e hipervigilância"
   },
   {
-    field:"social",
-    campo:"Campo social",
-    fator:"Preocupação financeira familiar"
+    field: "social",
+    campo: "Campo social",
+    fator: "Preocupação financeira familiar"
   },
   {
-    field:"social",
-    campo:"Campo social",
-    fator:"Isolamento da família"
+    field: "social",
+    campo: "Campo social",
+    fator: "Isolamento da família"
   },
   {
-    field:"social",
-    campo:"Campo social",
-    fator:"Notícia difícil durante visita"
+    field: "social",
+    campo: "Campo social",
+    fator: "Notícia difícil durante visita"
   },
   {
-    field:"biopsicossocial",
-    campo:"Campo biopsicossocial",
-    fator:"Dor influenciada por corpo, emoções e contexto"
+    field: "biopsicossocial",
+    campo: "Campo biopsicossocial",
+    fator: "Dor influenciada por corpo, emoções e contexto"
   }
 ];
 
@@ -61,6 +61,8 @@ let timerInterval;
 let playerName = "";
 
 const intro = document.getElementById("intro");
+const videoScreen = document.getElementById("video-screen");
+const introVideo = document.getElementById("intro-video");
 const gameArea = document.getElementById("game-area");
 const board = document.getElementById("memory-board");
 const feedback = document.getElementById("feedback");
@@ -75,19 +77,29 @@ const finalMessage = document.getElementById("final-message");
 const gameContainer = document.getElementById("game-container");
 const soundBg = document.getElementById("sound-bg");
 
+// BOTÃO DA TELA 1 → ABRE TELA DO VÍDEO
+document.getElementById("start-intro-btn").addEventListener("click", () => {
+  intro.style.display = "none";
+  videoScreen.style.display = "flex";
+  introVideo.play();
+});
+
+// BOTÃO DA TELA 2 → COMEÇA O JOGO
 document.getElementById("start-btn").addEventListener("click", startGame);
 
-function startGame(){
+function startGame() {
   playerName = playerInput.value.trim();
 
-  if(playerName === ""){
+  if (playerName === "") {
     alert("Digite seu nome para começar.");
     return;
   }
 
-  intro.style.display = "none";
+  videoScreen.style.display = "none";
   gameArea.style.display = "block";
   playerDisplay.innerHTML = playerName;
+
+  introVideo.pause();
 
   soundBg.volume = 0.25;
   soundBg.play();
@@ -96,7 +108,7 @@ function startGame(){
   startTimer();
 }
 
-function createCards(){
+function createCards() {
   cards = [];
 
   pairs.forEach(pair => {
@@ -140,14 +152,14 @@ function createCards(){
   });
 }
 
-function flipCard(card){
-  if(lockBoard) return;
-  if(card.classList.contains("flipped")) return;
-  if(card.classList.contains("matched")) return;
+function flipCard(card) {
+  if (lockBoard) return;
+  if (card.classList.contains("flipped")) return;
+  if (card.classList.contains("matched")) return;
 
   card.classList.add("flipped");
 
-  if(!firstCard){
+  if (!firstCard) {
     firstCard = card;
     return;
   }
@@ -156,13 +168,13 @@ function flipCard(card){
   checkMatch();
 }
 
-function checkMatch(){
+function checkMatch() {
   lockBoard = true;
 
   const sameField = firstCard.dataset.field === secondCard.dataset.field;
   const differentType = firstCard.dataset.type !== secondCard.dataset.type;
 
-  if(sameField && differentType){
+  if (sameField && differentType) {
     firstCard.classList.add("matched");
     secondCard.classList.add("matched");
 
@@ -174,7 +186,7 @@ function checkMatch(){
 
     resetTurn();
 
-    if(matches === pairs.length){
+    if (matches === pairs.length) {
       finishGame(true);
     }
 
@@ -190,33 +202,33 @@ function checkMatch(){
   }
 }
 
-function resetTurn(){
+function resetTurn() {
   firstCard = null;
   secondCard = null;
   lockBoard = false;
 }
 
-function startTimer(){
+function startTimer() {
   timerInterval = setInterval(() => {
     timeLeft--;
     timerDisplay.innerHTML = timeLeft;
 
-    if(timeLeft <= 10){
+    if (timeLeft <= 10) {
       timerDisplay.style.color = "#d50000";
     }
 
-    if(timeLeft <= 0){
+    if (timeLeft <= 0) {
       finishGame(false);
     }
   }, 1000);
 }
 
-function finishGame(won){
+function finishGame(won) {
   clearInterval(timerInterval);
   gameArea.style.display = "none";
   finalScreen.style.display = "grid";
 
-  if(won){
+  if (won) {
     finalEmoji.innerHTML = "🏆";
     finalTitle.innerHTML = "Parabéns!";
     finalMessage.innerHTML = `
@@ -234,14 +246,14 @@ function finishGame(won){
   }
 }
 
-function createConfetti(num){
-  for(let i=0;i<num;i++){
+function createConfetti(num) {
+  for (let i = 0; i < num; i++) {
     const conf = document.createElement("div");
     conf.classList.add("confetti");
-    conf.style.left = Math.random()*100 + "%";
-    conf.style.backgroundColor = `hsl(${Math.random()*360},100%,50%)`;
-    conf.style.animationDuration = (2 + Math.random()*3) + "s";
-    conf.style.width = conf.style.height = (6 + Math.random()*10) + "px";
+    conf.style.left = Math.random() * 100 + "%";
+    conf.style.backgroundColor = `hsl(${Math.random() * 360},100%,50%)`;
+    conf.style.animationDuration = (2 + Math.random() * 3) + "s";
+    conf.style.width = conf.style.height = (6 + Math.random() * 10) + "px";
     gameContainer.appendChild(conf);
   }
 }

@@ -1,60 +1,81 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html> 
+<html lang="pt-BR"> 
+<head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 
-<title>MANEJA DOR - Jogo da Memória BPS</title>
+  <title>MANEJA DOR - Jogo da Memória BPS</title> 
 
-<link rel="stylesheet" href="css/style.css">
-</head>
+  <link rel="stylesheet" href="css/style.css"> 
+</head> 
 
-<body>
+<body> 
 
-<div id="game-container">
+<div id="game-container"> 
 
-  <div id="intro">
-    <img src="img/manejador.jpg" id="logo">
+  <!-- TELA 1: INTRODUÇÃO COM IMAGEM -->
+  <div id="intro"> 
+    <img src="img/manejador.jpg" id="logo" alt="MANEJA DOR"> 
 
     <h1>Jogo da Memória BPS da Dor</h1>
 
-    <p class="intro-text">
-      Encontre as combinações entre os campos da abordagem ampliada e os fatores determinantes da dor em pacientes internados na UTI.
-      Você tem <strong>120 segundos</strong> para finalizar.
+    <p class="intro-text"> 
+      Encontre as combinações entre os campos da abordagem ampliada e os fatores determinantes da dor em pacientes internados na UTI. 
+      Você tem <strong>120 segundos</strong> para finalizar. 
     </p>
+  
+    <button id="start-intro-btn">INICIAR JOGO</button> 
+  </div> 
 
-    <input type="text" id="player-name" placeholder="Digite seu nome">
+  <!-- TELA 2: VÍDEO + NOME -->
+  <div id="video-screen"> 
+    <video id="intro-video" controls>
+      <source src="video/manejador.mp4" type="video/mp4">
+    </video>
 
-    <button id="start-btn">INICIAR JOGO</button>
+    <input type="text" id="player-name" placeholder="Digite seu nome"> 
+
+    <button id="start-btn">CONTINUAR</button> 
   </div>
 
-  <div id="game-area">
-    <div id="top-panel">
-      <div class="panel-card">Jogador: <span id="player-display"></span></div>
-      <div class="panel-card">Tempo: <span id="timer">120</span>s</div>
-      <div class="panel-card">Pares encontrados: <span id="matches">0</span>/10</div>
-    </div>
+  <!-- TELA 3: JOGO -->
+  <div id="game-area"> 
+    <div id="top-panel"> 
+      <div class="panel-card">Jogador: <span id="player-display"></span></div> 
+      <div class="panel-card">Tempo: <span id="timer">120</span>s</div> 
+      <div class="panel-card">Pares encontrados: <span id="matches">0</span>/10</div> 
+    </div> 
 
-    <div id="memory-board"></div>
+    <div id="memory-board"></div> 
 
-    <div id="feedback">
-      Clique em uma carta de campo e em um fator correspondente.
-    </div>
-  </div>
+    <div id="feedback"> 
+      Clique em uma carta de campo e em um fator correspondente. 
+    </div> 
+  </div> 
 
-  <div id="final-screen">
+  <!-- TELA FINAL -->
+  <div id="final-screen"> 
     <div id="final-emoji"></div>
-    <h1 id="final-title"></h1>
-    <p class="intro-text" id="final-message"></p>
-    <button id="restart-btn" onclick="location.reload()">JOGAR NOVAMENTE</button>
-  </div>
+  
+    <h1 id="final-title"></h1> 
 
-</div>
+    <p class="intro-text" id="final-message"></p> 
 
-<audio id="sound-bg" loop>
-  <source src="audio/sunshine-rain.mp3" type="audio/mpeg">
-</audio>
+    <button id="restart-btn" onclick="location.reload()">JOGAR NOVAMENTE</button> 
+  </div> 
 
-<script src="js/script.js"></script>
-</body>
+</div> 
+
+<audio id="sound-bg" loop> 
+  <source src="audio/sunshine-rain.mp3" type="audio/mpeg"> 
+</audio> 
+
+<footer id="credits">
+  © 2026 MANEJA DOR. Produto educacional de Edson Flavio de Sousa - ORCID:0000-0003-2960-6033. 
+  Recursos visuais feito pelas tecnologias Canva® e Gemini®.
+</footer>
+
+<script src="js/script.js"></script> 
+
+</body> 
 </html>
