@@ -76,6 +76,9 @@ const finalTitle = document.getElementById("final-title");
 const finalMessage = document.getElementById("final-message");
 const gameContainer = document.getElementById("game-container");
 const soundBg = document.getElementById("sound-bg");
+const instructionsModal = document.getElementById("instructions-modal");
+const instructionsBtn = document.getElementById("instructions-btn");
+const closeInstructionsBtn = document.getElementById("close-instructions-btn");
 const soundCorrect = new Audio("audio/acerto.mp3");
 const soundWrong = new Audio("audio/erro.mp3");
 const soundTime = new Audio("audio/time.mp3");
@@ -97,6 +100,29 @@ function playSound(sound) {
   sound.currentTime = 0;
   sound.play().catch(() => {});
 }
+
+function openInstructions() {
+  instructionsModal.hidden = false;
+}
+
+function closeInstructions() {
+  instructionsModal.hidden = true;
+}
+
+instructionsBtn.addEventListener("click", openInstructions);
+closeInstructionsBtn.addEventListener("click", closeInstructions);
+
+instructionsModal.addEventListener("click", event => {
+  if (event.target === instructionsModal) {
+    closeInstructions();
+  }
+});
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape" && !instructionsModal.hidden) {
+    closeInstructions();
+  }
+});
 
 // BOTÃO DA TELA 1 → ABRE TELA DO VÍDEO
 document.getElementById("start-intro-btn").addEventListener("click", () => {

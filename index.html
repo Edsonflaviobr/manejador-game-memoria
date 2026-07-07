@@ -35,7 +35,10 @@
 
     <input type="text" id="player-name" placeholder="Digite seu nome"> 
 
-    <button id="start-btn">CONTINUAR</button> 
+    <div class="video-actions">
+      <button id="instructions-btn" type="button">LER INSTRUÇÕES</button>
+      <button id="start-btn" type="button">CONTINUAR</button>
+    </div>
   </div>
 
   <!-- TELA 3: JOGO -->
@@ -65,6 +68,30 @@
   </div> 
 
 </div> 
+
+<div id="instructions-modal" class="instructions-modal" hidden>
+  <div class="instructions-window" role="dialog" aria-modal="true" aria-labelledby="instructions-title">
+    <button id="close-instructions-btn" class="close-instructions" type="button" aria-label="Fechar instruções">×</button>
+
+    <h2 id="instructions-title">Modo de jogar</h2>
+
+    <div class="instructions-content">
+      <p>Você tem <strong>120 segundos</strong> para encontrar todos os pares corretos entre os campos e seus respectivos fatores.</p>
+
+      <p>Os pares seguem estas cores:</p>
+
+      <ul>
+        <li><span class="color-dot biologico"></span>Biológico em azul.</li>
+        <li><span class="color-dot emocional"></span>Emocional em rosa/vinho.</li>
+        <li><span class="color-dot social"></span>Social em verde.</li>
+      </ul>
+
+      <p><strong>Atenção:</strong> há um card dourado especial que representa o campo integrado das três dimensões: o <strong>Biopsicossocial</strong>.</p>
+
+      <p>Boa sorte!</p>
+    </div>
+  </div>
+</div>
 
 <audio id="sound-bg" loop> 
   <source src="audio/sunshine-rain.mp3" type="audio/mpeg"> 
