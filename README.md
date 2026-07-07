@@ -4,7 +4,7 @@
 
 <p align="center">
 
-&#x20; <img src="img/manejador.jpg" width="350">
+&#x20; <img src="img/icon-192.png" width="200">
 
 </p>
 
