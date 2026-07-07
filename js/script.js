@@ -76,6 +76,27 @@ const finalTitle = document.getElementById("final-title");
 const finalMessage = document.getElementById("final-message");
 const gameContainer = document.getElementById("game-container");
 const soundBg = document.getElementById("sound-bg");
+const soundCorrect = new Audio("audio/acerto.mp3");
+const soundWrong = new Audio("audio/erro.mp3");
+const soundTime = new Audio("audio/time.mp3");
+const soundFinal = new Audio("audio/final.mp3");
+const soundGameOver = new Audio("audio/gameover.mp3");
+let timeWarningPlayed = false;
+
+[soundCorrect, soundWrong, soundTime, soundFinal, soundGameOver].forEach(sound => {
+  sound.preload = "auto";
+});
+
+soundCorrect.volume = 0.8;
+soundWrong.volume = 0.8;
+soundTime.volume = 0.9;
+soundFinal.volume = 0.9;
+soundGameOver.volume = 0.9;
+
+function playSound(sound) {
+  sound.currentTime = 0;
+  sound.play().catch(() => {});
+}
 
 // BOTÃO DA TELA 1 → ABRE TELA DO VÍDEO
 document.getElementById("start-intro-btn").addEventListener("click", () => {
@@ -104,6 +125,7 @@ function startGame() {
   soundBg.volume = 0.25;
   soundBg.play();
 
+  timeWarningPlayed = false;
   createCards();
   startTimer();
 }
@@ -139,7 +161,9 @@ function createCards() {
 
     cardElement.innerHTML = `
       <div class="card-inner">
-        <div class="card-front">?</div>
+        <div class="card-front">
+          <img src="img/icon-192.png" alt="MANEJA DOR">
+        </div>
         <div class="card-back ${card.type}">
           ${card.text}
         </div>
@@ -175,6 +199,8 @@ function checkMatch() {
   const differentType = firstCard.dataset.type !== secondCard.dataset.type;
 
   if (sameField && differentType) {
+    playSound(soundCorrect);
+
     firstCard.classList.add("matched");
     secondCard.classList.add("matched");
 
@@ -191,6 +217,8 @@ function checkMatch() {
     }
 
   } else {
+    playSound(soundWrong);
+
     feedback.style.background = "#ffcdd2";
     feedback.innerHTML = "Ainda não! Esse fator pertence a outro campo da abordagem ampliada da dor.";
 
@@ -215,6 +243,11 @@ function startTimer() {
 
     if (timeLeft <= 10) {
       timerDisplay.style.color = "#d50000";
+
+      if (!timeWarningPlayed) {
+        timeWarningPlayed = true;
+        playSound(soundTime);
+      }
     }
 
     if (timeLeft <= 0) {
@@ -227,8 +260,15 @@ function finishGame(won) {
   clearInterval(timerInterval);
   gameArea.style.display = "none";
   finalScreen.style.display = "grid";
+  finalScreen.classList.toggle("won", won);
+  finalScreen.classList.toggle("lost", !won);
+  soundBg.pause();
+  soundTime.pause();
+  soundTime.currentTime = 0;
 
   if (won) {
+    playSound(soundFinal);
+
     finalEmoji.innerHTML = "🏆";
     finalTitle.innerHTML = "Parabéns!";
     finalMessage.innerHTML = `
@@ -237,6 +277,8 @@ function finishGame(won) {
     `;
     createConfetti(140);
   } else {
+    playSound(soundGameOver);
+
     finalEmoji.innerHTML = "😢";
     finalTitle.innerHTML = "Tempo esgotado!";
     finalMessage.innerHTML = `
