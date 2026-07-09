@@ -109,6 +109,21 @@ function closeInstructions() {
   instructionsModal.hidden = true;
 }
 
+function getCardBackContent(card) {
+  const fieldImages = {
+    biologico: "img/biologico.jpg",
+    emocional: "img/emocional.jpg",
+    social: "img/social.jpg",
+    biopsicossocial: "img/bps.png"
+  };
+
+  if (card.type === "campo" && fieldImages[card.field]) {
+    return `<img class="field-card-image" src="${fieldImages[card.field]}" alt="${card.text}">`;
+  }
+
+  return card.text;
+}
+
 instructionsBtn.addEventListener("click", openInstructions);
 closeInstructionsBtn.addEventListener("click", closeInstructions);
 
@@ -184,14 +199,18 @@ function createCards() {
     cardElement.dataset.field = card.field;
     cardElement.dataset.type = card.type;
     cardElement.dataset.index = index;
+    const cardBackContent = getCardBackContent(card);
+    const imageCardClass = card.type === "campo" && ["biologico", "emocional", "social", "biopsicossocial"].includes(card.field)
+      ? " image-field"
+      : "";
 
     cardElement.innerHTML = `
       <div class="card-inner">
         <div class="card-front">
           <img src="img/icon-192.png" alt="MANEJA DOR">
         </div>
-        <div class="card-back ${card.type}">
-          ${card.text}
+        <div class="card-back ${card.type}${imageCardClass}">
+          ${cardBackContent}
         </div>
       </div>
     `;
@@ -223,16 +242,19 @@ function checkMatch() {
 
   const sameField = firstCard.dataset.field === secondCard.dataset.field;
   const differentType = firstCard.dataset.type !== secondCard.dataset.type;
+  const sameType = firstCard.dataset.type === secondCard.dataset.type;
 
   if (sameField && differentType) {
     playSound(soundCorrect);
 
     firstCard.classList.add("matched");
     secondCard.classList.add("matched");
+    const matchedCards = [firstCard, secondCard];
 
     matches++;
     matchesDisplay.innerHTML = matches;
 
+    feedback.classList.remove("negative-alert");
     feedback.style.background = "#c8e6c9";
     feedback.innerHTML = "Combinação correta! Esse fator pertence ao campo selecionado.";
 
@@ -240,13 +262,22 @@ function checkMatch() {
 
     if (matches === pairs.length) {
       finishGame(true);
+    } else {
+      setTimeout(() => {
+        matchedCards.forEach(card => card.classList.add("found"));
+      }, 1100);
     }
 
   } else {
     playSound(soundWrong);
 
     feedback.style.background = "#ffcdd2";
-    feedback.innerHTML = "Ainda não! Esse fator pertence a outro campo da abordagem ampliada da dor.";
+    feedback.innerHTML = sameType
+      ? "Atenção! Você virou dois cards do mesmo tipo. Escolha um campo e um fator correspondente."
+      : "Ainda não! Esse fator pertence a outro campo da abordagem ampliada da dor.";
+    feedback.classList.remove("negative-alert");
+    void feedback.offsetWidth;
+    feedback.classList.add("negative-alert");
 
     setTimeout(() => {
       firstCard.classList.remove("flipped");
