@@ -1,4 +1,4 @@
-const pairs = [
+﻿const pairs = [
   {
     field: "biologico",
     campo: "Campo biológico",
@@ -79,14 +79,16 @@ const soundBg = document.getElementById("sound-bg");
 const instructionsModal = document.getElementById("instructions-modal");
 const instructionsBtn = document.getElementById("instructions-btn");
 const closeInstructionsBtn = document.getElementById("close-instructions-btn");
+const listenInstructionsBtn = document.getElementById("listen-instructions-btn");
 const soundCorrect = new Audio("audio/acerto.mp3");
 const soundWrong = new Audio("audio/erro.mp3");
 const soundTime = new Audio("audio/time.mp3");
 const soundFinal = new Audio("audio/final.mp3");
 const soundGameOver = new Audio("audio/gameover.mp3");
+const soundInstructions = new Audio("audio/instrucaomemoria.mp3");
 let timeWarningPlayed = false;
 
-[soundCorrect, soundWrong, soundTime, soundFinal, soundGameOver].forEach(sound => {
+[soundCorrect, soundWrong, soundTime, soundFinal, soundGameOver, soundInstructions].forEach(sound => {
   sound.preload = "auto";
 });
 
@@ -95,6 +97,7 @@ soundWrong.volume = 0.8;
 soundTime.volume = 0.9;
 soundFinal.volume = 0.9;
 soundGameOver.volume = 0.9;
+soundInstructions.volume = 0.95;
 
 function playSound(sound) {
   sound.currentTime = 0;
@@ -107,6 +110,23 @@ function openInstructions() {
 
 function closeInstructions() {
   instructionsModal.hidden = true;
+  stopInstructionsAudio();
+}
+
+function setInstructionsButtonListening(isListening) {
+  listenInstructionsBtn.textContent = isListening ? "Ouvindo..." : "Ouvir Instruções";
+}
+
+function playInstructionsAudio() {
+  introVideo.pause();
+  setInstructionsButtonListening(true);
+  playSound(soundInstructions);
+}
+
+function stopInstructionsAudio() {
+  soundInstructions.pause();
+  soundInstructions.currentTime = 0;
+  setInstructionsButtonListening(false);
 }
 
 function getCardBackContent(card) {
@@ -125,6 +145,8 @@ function getCardBackContent(card) {
 }
 
 instructionsBtn.addEventListener("click", openInstructions);
+listenInstructionsBtn.addEventListener("click", playInstructionsAudio);
+soundInstructions.addEventListener("ended", () => setInstructionsButtonListening(false));
 closeInstructionsBtn.addEventListener("click", closeInstructions);
 
 instructionsModal.addEventListener("click", event => {
@@ -157,6 +179,7 @@ function startGame() {
     return;
   }
 
+  stopInstructionsAudio();
   videoScreen.style.display = "none";
   gameArea.style.display = "block";
   playerDisplay.innerHTML = playerName;

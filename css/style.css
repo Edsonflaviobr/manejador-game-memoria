@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
 
 *{
   margin:0;
@@ -134,11 +134,35 @@ h1{
   border:1px solid rgba(0,125,153,0.18);
 }
 
+.instructions-title-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  margin-bottom:16px;
+  padding-right:46px;
+}
+
 .instructions-window h2{
   color:#007d99;
   font-size:1.7rem;
-  margin-bottom:16px;
-  padding-right:42px;
+  margin:0;
+}
+
+#listen-instructions-btn{
+  flex:0 0 auto;
+  border:none;
+  border-radius:10px;
+  padding:10px 14px;
+  background:linear-gradient(135deg,#007d99,#0d47a1);
+  color:#ffffff;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 8px 18px rgba(0,125,153,0.18);
+}
+
+#listen-instructions-btn:hover{
+  transform:translateY(-1px);
 }
 
 .instructions-content{
@@ -158,11 +182,24 @@ h1{
 .instructions-examples{
   display:grid;
   gap:16px;
-  padding-left:24px;
+  padding-left:0;
+  list-style:none;
+  counter-reset:instruction-example;
 }
 
 .instructions-examples li{
-  padding-left:4px;
+  display:grid;
+  grid-template-columns:28px auto 1fr;
+  align-items:center;
+  gap:12px;
+  padding-left:0;
+  counter-increment:instruction-example;
+}
+
+.instructions-examples li::before{
+  content:counter(instruction-example) ")";
+  color:#007d99;
+  font-weight:900;
 }
 
 .instruction-field-icon{
@@ -664,12 +701,40 @@ h1{
     border-radius:12px;
   }
 
+  .instructions-title-row{
+    align-items:flex-start;
+    gap:10px;
+    padding-right:44px;
+  }
+
   .instructions-window h2{
     font-size:1.45rem;
   }
 
+  #listen-instructions-btn{
+    padding:9px 10px;
+    font-size:0.86rem;
+    line-height:1.15;
+    max-width:118px;
+  }
+
   .instructions-content{
     font-size:1rem;
+  }
+
+  .instructions-examples{
+    padding-left:0;
+  }
+
+  .instructions-examples li{
+    grid-template-columns:24px auto 1fr;
+    gap:8px;
+    padding-left:0;
+  }
+
+  .instruction-field-icon{
+    width:118px;
+    height:84px;
   }
 
   .card{

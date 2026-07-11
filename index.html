@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+﻿<!DOCTYPE html> 
 <html lang="pt-BR"> 
 <head> 
   <meta charset="UTF-8"> 
@@ -13,7 +13,6 @@
 
 <div id="game-container"> 
 
-  <!-- TELA 1: INTRODUÇÃO COM IMAGEM -->
   <div id="intro"> 
     <img src="img/manejador.jpg" id="logo" alt="MANEJA DOR"> 
 
@@ -27,7 +26,6 @@
     <button id="start-intro-btn">INICIAR JOGO</button> 
   </div> 
 
-  <!-- TELA 2: VÍDEO + NOME -->
   <div id="video-screen"> 
     <video id="intro-video" controls playsinline>
      <source src="video/manejador.mp4" type="video/mp4">
@@ -41,7 +39,6 @@
     </div>
   </div>
 
-  <!-- TELA 3: JOGO -->
   <div id="game-area"> 
     <div id="top-panel"> 
       <div class="panel-card">Jogador: <span id="player-display"></span></div> 
@@ -56,7 +53,6 @@
     </div> 
   </div> 
 
-  <!-- TELA FINAL -->
   <div id="final-screen"> 
     <div id="final-emoji"></div>
   
@@ -73,7 +69,10 @@
   <div class="instructions-window" role="dialog" aria-modal="true" aria-labelledby="instructions-title">
     <button id="close-instructions-btn" class="close-instructions" type="button" aria-label="Fechar instruções">×</button>
 
-    <h2 id="instructions-title">Modo de jogar</h2>
+    <div class="instructions-title-row">
+      <h2 id="instructions-title">Como jogar</h2>
+      <button id="listen-instructions-btn" type="button">Ouvir Instruções</button>
+    </div>
 
     <div class="instructions-content">
       <p>Memorize a localização dos cards dos campos de abordagem da dor (<strong>Biológico</strong>, <strong>Emocional</strong> e <strong>Social</strong>) e dos fatores biopsicossociais correspondentes. Seu objetivo é encontrar os pares corretos: não importa se você localizar primeiro o card do campo ou o do fator, o importante é associá-los corretamente.</p>
@@ -82,7 +81,7 @@
 
       <ol class="instructions-examples">
         <li><img class="instruction-field-icon" src="img/emocional.jpg" alt="Campo Emocional"> → Ansiedade e Insônia.</li>
-        <li>Distanciamento da família → <img class="instruction-field-icon" src="img/social.jpg" alt="Campo Social"></li>
+        <li><img class="instruction-field-icon" src="img/social.jpg" alt="Campo Social"> ← Distanciamento da família.</li>
       </ol>
 
       <p>Se surgir alguma dúvida sobre a relação entre um fator clínico e seu respectivo campo biopsicossocial, consulte os Capítulos 1 e 2 do guia.</p>
